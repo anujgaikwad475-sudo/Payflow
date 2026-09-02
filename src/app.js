@@ -1,13 +1,14 @@
-const express = require("express");
-const cors = require("cors");//Imports the Cross-Origin Resource Sharing middleware
-const authRoutes = require("./routes/authroutes");
+const express = require('express');
+const cors = require('cors');
+const authRoutes = require('./routes/authroutes');
+const walletRoutes = require('./routes/walletRoutes');
 
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
-app.use(express.json());//parsing incoming json request bodies 
+app.use('/api/auth', authRoutes);
+app.use('/api/wallet', walletRoutes);
 
-app.use('/api/auth' , authRoutes);
-
-module.exports = app ; 
+module.exports = app;

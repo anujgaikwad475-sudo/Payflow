@@ -1,3 +1,4 @@
+const Wallet = require('../models/Wallet');
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
@@ -23,7 +24,7 @@ exports.signup = async (req, res) => {
 
     // Create user
     const user = await User.create({ name, email, password, phone });//initiates a new mongoose documanet to register the user
-
+    await Wallet.create({ userId: user._id, balance: 0 });
     // Generate JWT
     const token = generateToken(user._id);//calls the token function to create the new token 
 
