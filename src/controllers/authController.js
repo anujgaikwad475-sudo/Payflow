@@ -1,5 +1,5 @@
-const User = require("../models/Users");
-const jwt = require("jsonwebtokens");
+const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 
 const generateToken = (userID) =>

@@ -1,4 +1,4 @@
-const mongoose = requie("mongoose");
+const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");//used to hash and salt passwords securely (basically hide)
 
 
@@ -6,14 +6,14 @@ const bcrypt = require("bcryptjs");//used to hash and salt passwords securely (b
 const userSchema = new mongoose.Schema(
 {
     name : {
-        type : string ,
+        type : String ,
         required : [true , 'please provide your name'], 
         trim : true ,
 
     },
 
     email : {
-        type: string ,
+        type: String ,
         required : [true , 'enter your email id'],
         unique : true , 
         lowercase : true , 
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     },
 
     password : {
-        type : string , 
+        type : String , 
         required : [true , 'please enter your password'],
         minlenght : 6 ,
         select : false , //prevents password to get leaked in quewries 
@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema(
     },
 
     phone :  {
-        type : string , 
+        type : String , 
         required : [true , 'please enter your phone number'],
         unique : true ,
 
