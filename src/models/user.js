@@ -1,54 +1,41 @@
+
+    
+
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, 'Please provide a name'],
+      required: true,
       trim: true,
     },
     email: {
       type: String,
-      required: [true, 'Please provide an email'],
+      required: true,
       unique: true,
+      trim: true,
       lowercase: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+      unique: true,
       trim: true,
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password'],
-      minlength: 6,
-      select: false,
+      required: true,
     },
-    phone: {
+    pin: {
       type: String,
-      required: [true, 'Please provide a phone number'],
-      unique: true,
+      default: null, // Hashed 4-digit PIN
     },
   },
   { timestamps: true }
 );
 
-// Must use a regular function here so 'this' points to the document being saved
-userSchema.pre('save', async function () {
-  if (!this.isModified('password')) return;
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
-
-// Compare password helper
-userSchema.methods.matchPassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
-};
-
 module.exports = mongoose.model('User', userSchema);
-    
-
-
-
-    
-
 
 
 
